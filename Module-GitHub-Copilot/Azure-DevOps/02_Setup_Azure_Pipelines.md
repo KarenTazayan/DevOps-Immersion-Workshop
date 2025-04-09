@@ -1,3 +1,5 @@
+# The Basics of Azure Pipelines with GitHub Copilot
+
 Please select the **ShoppingApp.sln** file in GitHub Copilot chat.
 
 01_Prompt
@@ -10,6 +12,8 @@ How can I build the selected solution using Azure Pipelines?
 ```
 After running, I received the following error: No hosted parallelism has been purchased or granted. To request a free parallelism grant, please fill out the following form https://aka.ms/azpipelines-parallelism-request
 ```
+
+# Setting Up an Azure Pipelines Agent with GitHub Copilot
 
 03_Prompt
 ```

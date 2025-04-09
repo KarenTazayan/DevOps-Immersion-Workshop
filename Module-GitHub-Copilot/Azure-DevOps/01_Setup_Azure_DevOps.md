@@ -1,4 +1,4 @@
-# Hosting .NET 9 Solution on Azure DevOps with CI/CD
+# Setting Up an Azure DevOps Environment with GitHub Copilot
 
 01_Prompt
 ```
