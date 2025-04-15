@@ -1,0 +1,53 @@
+# Azure Pipeline for ShoppingApp
+
+trigger:
+  - master  # Change this to your main branch name
+
+pool:
+  name: Default
+
+variables:
+  buildConfiguration: 'Release'
+  solution: '**/*.sln'
+  resourceGroupName: 'rg-shoppingapp' # Replace with your resource group name
+  location: 'eastus' # Replace with your Azure region
+
+jobs:
+- job: Versioning
+  displayName: 'Generate Version with GitVersion'
+  steps:
+  - checkout: self
+    fetchDepth: 0
+
+  - task: gitversion/setup@3.2.0
+    displayName: Install GitVersion
+    inputs:
+      versionSpec: '6.2.x'
+
+  - task: gitversion/execute@3.2.0
+    displayName: 'Run GitVersion'
+    inputs:
+      configFilePath: 'GitVersion.yml'
+      updateAssemblyInfo: true
+
+  - script: |
+      echo "##vso[task.setvariable variable=GitVersion.SemVer]$(GitVersion.SemVer)"
+      echo "Version: $(GitVersion.SemVer)"
+    displayName: 'Set GitVersion Variables'
+
+- job: DeployACR
+  displayName: 'Deploy Azure Container Registry'
+  dependsOn: Versioning
+  steps:
+  - task: AzureCLI@2
+    displayName: 'Deploy ACR using Bicep'
+    inputs:
+      azureSubscription: 'DefaultAzureServiceConnection' # Replace with your Azure service connection name
+      scriptType: 'bash'
+      scriptLocation: 'inlineScript'
+      inlineScript: |
+        az group create --name $(resourceGroupName) --location $(location)
+        az deployment group create \
+          --resource-group $(resourceGroupName) \
+          --template-file $(Build.SourcesDirectory)/deploy/acr.bicep \
+          --parameters @$(Build.SourcesDirectory)/deploy/acr.parameters.json

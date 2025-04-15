@@ -1,1 +1,0 @@
-# Continuous Deployment with GitHub Copilot and Azure

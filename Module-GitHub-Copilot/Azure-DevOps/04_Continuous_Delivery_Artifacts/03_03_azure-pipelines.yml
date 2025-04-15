@@ -1,0 +1,30 @@
+# Azure DevOps Pipeline for Deploying Azure Container Registry using Bicep
+
+trigger:
+  - master
+
+pool:
+  name: Default
+
+variables:
+  buildConfiguration: 'Release'
+  solution: '**/*.sln'
+  resourceGroupName: 'rg-shoppingapp'
+  location: 'eastus' # Replace with your Azure region
+
+jobs:
+- job: DeployACR
+  displayName: 'Deploy Azure Container Registry'
+  steps:
+  - task: AzureCLI@2
+    displayName: 'Deploy ACR using Bicep'
+    inputs:
+      azureSubscription: 'DefaultAzureServiceConnection' # Replace with your Azure service connection name
+      scriptType: 'bash'
+      scriptLocation: 'inlineScript'
+      inlineScript: |
+        az group create --name $(resourceGroupName) --location $(location)
+        az deployment group create \
+          --resource-group $(resourceGroupName) \
+          --template-file $(Build.SourcesDirectory)/deploy/acr.bicep \
+          --parameters @$(Build.SourcesDirectory)/deploy/acr.parameters.json

@@ -1,0 +1,32 @@
+# Use the official .NET 9 SDK image for building the application
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the solution and restore dependencies
+COPY *.sln ./
+COPY src/ShoppingApp.Abstractions/*.csproj ./src/ShoppingApp.Abstractions/
+COPY src/ShoppingApp.Common/*.csproj ./src/ShoppingApp.Common/
+COPY src/ShoppingApp.Grains/*.csproj ./src/ShoppingApp.Grains/
+COPY src/ShoppingApp.WebUI/*.csproj ./src/ShoppingApp.WebUI/
+RUN dotnet restore
+
+# Copy the entire source code and build the application
+COPY . ./
+RUN dotnet publish src/ShoppingApp.WebUI/ShoppingApp.WebUI.csproj -c Release -o /app/publish
+
+# Use the official .NET 9 runtime image for running the application
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the published output from the build stage
+COPY --from=build /app/publish ./
+
+# Expose the port the application runs on
+EXPOSE 80
+
+# Set the entry point for the container
+ENTRYPOINT ["dotnet", "ShoppingApp.WebUI.dll"]
