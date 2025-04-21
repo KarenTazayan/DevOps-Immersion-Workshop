@@ -46,3 +46,4 @@ How do I implement versioning with GitTools in Azure Pipelines?
 Now you should build and publish the ShoppingApp image by using
 ACR login data and GitVersion.SemVer as a tag.
 ```
+[Desired result for 05_Prompt: azure-pipelines.yml](04_Continuous_Delivery_Artifacts/05_azure-pipelines.yml).

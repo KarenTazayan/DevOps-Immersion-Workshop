@@ -1,0 +1,82 @@
+# Azure Pipeline for ShoppingApp
+
+trigger:
+  - master  # Change this to your main branch name
+
+pool:
+  name: Default
+
+variables:
+  buildConfiguration: 'Release'
+  solution: '**/*.sln'
+  resourceGroupName: 'rg-shoppingapp' # Replace with your resource group name
+  location: 'eastus' # Replace with your Azure region
+
+jobs:
+- job: Deploy_Azure_Container_Registry
+  displayName: 'Deploy Azure Container Registry'
+  steps:
+  - task: AzureCLI@2
+    name: t1
+    displayName: 'Deploy ACR using Bicep'
+    inputs:
+      azureSubscription: 'DefaultAzureServiceConnection' # Replace with your Azure service connection name
+      scriptType: 'bash'
+      scriptLocation: 'inlineScript'
+      inlineScript: |
+        az group create --name $(resourceGroupName) --location $(location)
+        ACR_CREDENTIALS=$(az deployment group create \
+          --resource-group $(resourceGroupName) \
+          --template-file $(Build.SourcesDirectory)/deploy/acr.bicep \
+          --parameters @$(Build.SourcesDirectory)/deploy/acr.parameters.json \
+          --query properties.outputs.acrLoginServer.value -o json)
+        
+        echo "ACR Credentials: $ACR_CREDENTIALS"
+        acrName=$ACR_CREDENTIALS
+        echo "ACR Name: $acrName"
+        echo "##vso[task.setvariable variable=acrName;isOutput=true]$acrName"
+
+- job: Generate_Version_With_GitVersion
+  displayName: 'Generate Version with GitVersion'
+  dependsOn: Deploy_Azure_Container_Registry
+  steps:
+  - checkout: self
+    fetchDepth: 0
+
+  - task: gitversion/setup@3.2.0
+    displayName: Install GitVersion
+    inputs:
+      versionSpec: '6.2.x'
+
+  - task: gitversion/execute@3.2.0
+    displayName: 'Run GitVersion'
+    inputs:
+      configFilePath: 'GitVersion.yml'
+      updateAssemblyInfo: true
+
+  - script: |
+      echo "##vso[task.setvariable variable=GitVersionSemVer;isOutput=true]$(GitVersion.SemVer)"
+      echo "Version: $(GitVersionSemVer)"
+    displayName: 'Set GitVersion Variables'
+    name: t1
+
+- job: BuildAndPushDockerImage
+  displayName: 'Build and Push Docker Image to ACR'
+  dependsOn: 
+    - Deploy_Azure_Container_Registry
+    - Generate_Version_With_GitVersion
+  variables:
+    acrName: $[ dependencies.Deploy_Azure_Container_Registry.outputs['t1.acrName'] ]
+    gitVersionSemVer: $[ dependencies.Generate_Version_With_GitVersion.outputs['t1.GitVersionSemVer'] ]
+  steps:
+  - task: AzureCLI@2
+    displayName: 'Login to Azure Container Registry'
+    inputs:
+      azureSubscription: 'DefaultAzureServiceConnection' # Replace with your Azure service connection name
+      addSpnToEnvironment: true
+      scriptType: 'bash'
+      scriptLocation: 'inlineScript'
+      inlineScript: |
+        az acr login --name $(acrName)
+        docker build -t $(acrName)/shoppingapp:$(gitVersionSemVer) -f src/ShoppingApp.WebUI/Dockerfile .
+        docker push $(acrName)/shoppingapp:$(gitVersionSemVer)
