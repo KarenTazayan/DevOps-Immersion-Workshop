@@ -80,3 +80,25 @@ jobs:
         az acr login --name $(acrName)
         docker build -t $(acrName)/shoppingapp:$(gitVersionSemVer) -f src/ShoppingApp.WebUI/Dockerfile .
         docker push $(acrName)/shoppingapp:$(gitVersionSemVer)
+
+- job: Deploy_Infrastructure_And_Application
+  displayName: 'Deploy Infrastructure and Application'
+  dependsOn: 
+    - Build_And_Push_Docker_Image
+    - Deploy_Azure_Container_Registry
+    - Generate_Version_With_GitVersion
+  variables:
+    acrName: $[ dependencies.Deploy_Azure_Container_Registry.outputs['t1.acrName'] ]
+    gitVersionSemVer: $[ dependencies.Generate_Version_With_GitVersion.outputs['t1.GitVersionSemVer'] ]
+  steps:
+  - task: AzureCLI@2
+    displayName: 'Deploy Infrastructure and Application using Bicep'
+    inputs:
+      azureSubscription: 'DefaultAzureServiceConnection' # Replace with your Azure service connection name
+      scriptType: 'bash'
+      scriptLocation: 'inlineScript'
+      inlineScript: |
+        az deployment group create \
+          --resource-group $(resourceGroupName) \
+          --template-file $(Build.SourcesDirectory)/deploy/infrastructure.bicep \
+          --parameters imageName=$(acrName)/shoppingapp:$(gitVersionSemVer)
