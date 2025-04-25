@@ -11,3 +11,19 @@ I need to install and use ReSharper Command Line Tools (CLT) as a .NET tool on o
 ```
 [Desired result for 01_Prompt: install-resharperclt.sh](03_Continuous_Integration/01_01_install-resharperclt.sh)  
 [Desired result for 01_Prompt: azure-pipelines.yml](03_Continuous_Integration/01_02_azure-pipelines.yml)
+
+02_Prompt
+```
+I need to unit test grains in ShoppingApp.Grains.csproj.
+
+1. Please use official docs from Microsoft: Unit testing with Orleans
+2. Put xUnit project under test/Tests.ShoppingApp.Grains
+3. Add it to ShoppingApp.sln under test virtual folder
+3. Write tests for ShoppingCartGrain 
+```
+
+03_Prompt
+```
+Plesae add task into Azure Pipelines to run test/Tests.ShoppingApp.Grains test project.
+```
+[Desired result for 03_Prompt: azure-pipelines.yml](03_Continuous_Integration/03_azure-pipelines.yml)
