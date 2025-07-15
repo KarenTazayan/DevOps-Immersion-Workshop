@@ -18,7 +18,7 @@ I need to unit test grains in ShoppingApp.Grains.csproj.
 
 1. Please use official docs from Microsoft: Unit testing with Orleans
 2. Put xUnit project under test/Tests.ShoppingApp.Grains
-3. Add it to ShoppingApp.sln under test virtual folder
+3. Add it to ShoppingApp.slnx under test virtual folder
 3. Write tests for ShoppingCartGrain 
 ```
 

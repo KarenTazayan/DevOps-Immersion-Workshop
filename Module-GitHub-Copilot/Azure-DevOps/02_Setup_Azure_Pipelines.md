@@ -1,6 +1,6 @@
 # The Basics of Azure Pipelines with GitHub Copilot
 
-Please select the **ShoppingApp.sln** file in GitHub Copilot chat.
+Please select the **ShoppingApp.slnx** file in GitHub Copilot chat.
 
 01_Prompt
 ```

@@ -32,7 +32,7 @@ jobs:
       projects: '$(solution)'
       arguments: '--configuration $(buildConfiguration) --no-restore'
 
-  - script: jb inspectcode ShoppingApp.sln --no-build -f="Text" -o="inspection-report.txt"
+  - script: jb inspectcode ShoppingApp.slnx --no-build -f="Text" -o="inspection-report.txt"
     displayName: 'Run ReSharper InspectCode'
 
   - task: PublishBuildArtifacts@1
