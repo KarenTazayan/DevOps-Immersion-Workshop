@@ -22,12 +22,9 @@ builder.Services.AddLocalStorageServices();
 
 builder.Host.UseOrleans((context, siloBuilder) =>
 {
-    if (context.HostingEnvironment.IsDevelopment())
-    {
-        siloBuilder.UseLocalhostClustering()
-            .AddMemoryGrainStorage(PersistentStorageConfig.AzureSqlName)
-            .AddMemoryGrainStorage(PersistentStorageConfig.AzureStorageName);
-    }
+    siloBuilder.UseLocalhostClustering()
+        .AddMemoryGrainStorage(PersistentStorageConfig.AzureSqlName)
+        .AddMemoryGrainStorage(PersistentStorageConfig.AzureStorageName);
     
     siloBuilder.AddStartupTask<SeedProductStoreTask>();
 });

@@ -8,7 +8,7 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  solution: '**/*.sln'
+  solution: '**/*.slnx'
   resourceGroupName: 'rg-shoppingapp' # Replace with your resource group name
   location: 'eastus' # Replace with your Azure region
 
@@ -43,20 +43,20 @@ jobs:
   - checkout: self
     fetchDepth: 0
 
-  - task: gitversion/setup@3.2.0
+  - task: gitversion-setup@4
     displayName: Install GitVersion
     inputs:
-      versionSpec: '6.2.x'
+      versionSpec: '6.3.x'
 
-  - task: gitversion/execute@3.2.0
+  - task: gitversion-execute@4
     displayName: 'Run GitVersion'
     inputs:
       configFilePath: 'GitVersion.yml'
       updateAssemblyInfo: true
 
   - script: |
-      echo "##vso[task.setvariable variable=GitVersionSemVer;isOutput=true]$(GitVersion.SemVer)"
-      echo "Version: $(GitVersionSemVer)"
+      echo "##vso[task.setvariable variable=GitVersionSemVer;isOutput=true]$(GitVersion_SemVer)"
+      echo "Version: $(GitVersion_SemVer)"
     displayName: 'Set GitVersion Variables'
     name: t1
 
