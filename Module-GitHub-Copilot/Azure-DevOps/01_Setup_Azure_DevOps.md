@@ -2,11 +2,11 @@
 
 01_Prompt
 ```
-Hi, my friend! I have an existing .NET 9 solution and I want to host it on Azure DevOps for the future automation. What should I do first to set this up?
+Hi, I’m new to Azure DevOps. I want to host my .NET 9 source code in Azure DevOps. Please provide a very concise step-by-step guide.
 ```
 02_Prompt
 ```
-I don’t have an organization. Where can I create one?
+I don’t have an Azure DevOps organization. Where can I create one?
 ```
 03_Prompt
 ```
