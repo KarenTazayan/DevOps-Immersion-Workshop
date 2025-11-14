@@ -44,3 +44,7 @@ GitHub Actions
 - Continuous Deployment with GitHub Copilot and Azure
 
 ### Module GitHub Copilot: Advanced GitHub Copilot Features
+
+- Introduction GitHub Copilot
+- Prompt engineering with GitHub Copilot
+- GitHub Copilot vs Static Code Analysis Tools
