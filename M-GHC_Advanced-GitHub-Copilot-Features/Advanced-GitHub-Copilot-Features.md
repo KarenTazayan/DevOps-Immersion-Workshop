@@ -6,3 +6,5 @@
 - Azure MCP Server with GitHub Copilot
 - Developing Unit Tests with GitHub Copilot
 - Making Code More Functional with GitHub Copilot
+- AI-powered SQL Server development with GitHub Copilot
+- Agentic AI in Azure DevOps and GitHub
