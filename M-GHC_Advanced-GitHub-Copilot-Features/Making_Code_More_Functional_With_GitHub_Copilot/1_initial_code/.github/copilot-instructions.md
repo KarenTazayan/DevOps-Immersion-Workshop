@@ -1,0 +1,1 @@
+Unless a prompt explicitly specifies otherwise, always install and reference the most recent stable release of any software, package, or library.
