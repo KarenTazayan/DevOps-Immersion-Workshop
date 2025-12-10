@@ -15,6 +15,12 @@ git commit -m "Initial commit."
 6. Enter the prompt in the chat input field:
 
 ```
+Rewrite the code in more functional way
+
 Requirements:
--
+- Use CSharpFunctionalExtensions NuGet package by Vladimir Khorikov
+- Use Result/Result<T> as explicit success/failure wrapper instead of throwing exceptions.
+- Use .NET exceptions only for showing a bag in the system
+- Rewrite the code of whole ShoppingApp solution
+- Do not apply other functional patterns except mentioned above
 ```
