@@ -1,0 +1,21 @@
+CREATE DATABASE AIPoweredWorkshop;
+GO
+
+USE AIPoweredWorkshop;
+GO
+
+CREATE TABLE Customers (
+    CustomerId INT IDENTITY PRIMARY KEY,
+    FirstName NVARCHAR(50),
+    LastName NVARCHAR(50),
+    Email NVARCHAR(100) UNIQUE,
+    CreatedAt DATETIME2 DEFAULT SYSUTCDATETIME()
+);
+
+CREATE TABLE Orders (
+    OrderId INT IDENTITY PRIMARY KEY,
+    CustomerId INT NOT NULL,
+    Amount DECIMAL(10,2),
+    CreatedAt DATETIME2 DEFAULT SYSUTCDATETIME(),
+    FOREIGN KEY (CustomerId) REFERENCES Customers(CustomerId)
+);

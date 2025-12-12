@@ -1,0 +1,2 @@
+-- @mssql Chat Query Editor ((LocalDb)\MSSQLLocalDB:AIPoweredWorkshop:)
+-- Fill Customers and Orders tables with 100 rows of sample near real data

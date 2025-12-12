@@ -1,0 +1,2 @@
+-- @mssql Chat Query Editor ((LocalDb)\MSSQLLocalDB:AIPoweredWorkshop:)
+-- Generate a monthly revenue breakdown of Orders for the last 12 months
