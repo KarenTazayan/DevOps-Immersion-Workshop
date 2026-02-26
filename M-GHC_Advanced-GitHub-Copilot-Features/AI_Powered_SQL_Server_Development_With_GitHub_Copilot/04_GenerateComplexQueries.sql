@@ -1,3 +1,4 @@
 -- @mssql Chat Query Editor ((LocalDb)\MSSQLLocalDB:AIPoweredWorkshop:)
 -- Generate a monthly revenue breakdown of Orders for the last 12 months
+-- Generate a list of customers who have not placed any orders in the last 6 months
 -- Show me the top 10 customers by total spend.

@@ -4,6 +4,9 @@ GO
 USE AIPoweredWorkshop;
 GO
 
+DROP TABLE Orders;
+DROP TABLE Customers;
+
 CREATE TABLE Customers (
     CustomerId INT IDENTITY PRIMARY KEY,
     FirstName NVARCHAR(50),

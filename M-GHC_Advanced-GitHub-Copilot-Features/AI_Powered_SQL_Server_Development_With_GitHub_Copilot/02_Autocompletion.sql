@@ -2,4 +2,4 @@
 
 USE AIPoweredWorkshop
 
-SELECT *
+SELECT * 
