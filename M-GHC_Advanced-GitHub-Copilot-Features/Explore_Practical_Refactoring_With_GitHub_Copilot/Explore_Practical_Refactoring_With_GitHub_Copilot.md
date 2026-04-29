@@ -1,6 +1,6 @@
-Making_Code_More_Functional_With_GitHub_Copilot
+Explore_Practical_Refactoring_With_GitHub_Copilot
 
-1. Copy all content from 1_initial_code directory to a new directoty (sample name: Making_Code_More_Functional_With_GitHub_Copilot)
+1. Copy all content from 1_initial_code directory to a new directoty (sample name: Explore_Practical_Refactoring_With_GitHub_Copilot)
 2. Initialize version control by Git
 ```
 git init

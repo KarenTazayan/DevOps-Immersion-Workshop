@@ -1,4 +1,4 @@
-Azure_MCP_Server_With_GitHub_Copilot
+AI-Powered_Azure_Operations_With_GitHub_Copilot
 
 # Connect to Azure from VS Code using Azure MCP Server + GitHub Copilot (Agent Mode)
 > Goal: authenticate to Azure and ask Copilot (using Azure MCP Server tools) to do some NL commands.
