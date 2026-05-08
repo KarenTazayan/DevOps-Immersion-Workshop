@@ -8,7 +8,7 @@ using MudSeverity = MudBlazor.Severity;
 
 namespace ShoppingApp.WebUI.Shared;
 
-public partial class MainLayout
+public partial class MainLayout : IDisposable
 {
     private const string PrefersDarkThemeKey = "prefers-dark-scheme";
 
@@ -75,6 +75,8 @@ public partial class MainLayout
 
     protected override void OnInitialized()
     {
+        // Subscribe to the event
+        NavigationManager.LocationChanged += LocationChanged;
         base.OnInitialized();
     }
 
@@ -111,4 +113,14 @@ public partial class MainLayout
         });
 
     private void DrawerToggle() => _drawerOpen = !_drawerOpen;
+
+    private void LocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        var navigationMethod = e.IsNavigationIntercepted ? "HTML" : "code";
+    }
+
+    void IDisposable.Dispose()
+    {
+        NavigationManager.LocationChanged -= LocationChanged;
+    }
 }
