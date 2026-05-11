@@ -7,4 +7,7 @@
     <Project Path="src/ShoppingApp.WebUI/ShoppingApp.WebUI.csproj" />
   </Folder>
   <Folder Name="/test/" />
+  <Folder Name="/workshop/">
+    <File Path="Explore_Practical_Refactoring_With_GitHub_Copilot.md" />
+  </Folder>
 </Solution>
