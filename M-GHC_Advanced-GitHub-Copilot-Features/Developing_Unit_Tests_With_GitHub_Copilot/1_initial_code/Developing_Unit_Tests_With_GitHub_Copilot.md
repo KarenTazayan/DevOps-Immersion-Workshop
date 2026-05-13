@@ -14,6 +14,8 @@ git commit -m "Initial commit."
 5. Open GitHub Copilot Chat view.
 6. Enter the prompt in the chat input field:
 
+The prompt bellow is designed to create a new test project for the ShoppingApp.Grains project using xUnit v3, following the constraints and approach outlined in the DotNet Unit Test Coach agent.
+
 ```
 Create a new test project for the ShoppingApp.Grains project using xUnit v3.
 
@@ -25,3 +27,20 @@ Requirements:
 - Add the test project to the existing solution file (.slnx)
 - Create tests only for ProductGrain and ShoppingCartGrain
 ```
+
+The prompt bellow is designed to create a new test project for the ShoppingApp.Grains project using xUnit v3, following the constraints and approach outlined in the DotNet Unit Test Coach agent.
+
+```
+Create unit tests for ProductGrain and ShoppingCartGrain
+
+Requirements:
+- Name the project if does not exist: ShoppingApp.Grains.Tests
+- Add the test project to the existing solution file if not already added (.slnx)
+```
+
+Example prompts to try with DotNetTestReviewerReadOnly.agent:
+
+- Create xUnit tests for ShoppingCartGrain checkout success and payment failure paths.
+- Add edge-case tests for InventoryGrain when stock is zero or negative.
+- Review existing tests for ProductGrain and identify missing behaviors.
+- Write tests for OrderGrain state transitions and run the relevant test project.
