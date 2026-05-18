@@ -46,9 +46,12 @@ Requirements:
 - Add the test project to the existing solution file if not already added (.slnx)
 ```
 
-Example prompts to try with DotNetTestReviewerReadOnly.agent:
+Example prompts to try with DotNetUnitTestCoach.agent:
 
 - Create xUnit tests for ShoppingCartGrain checkout success and payment failure paths.
 - Add edge-case tests for InventoryGrain when stock is zero or negative.
-- Review existing tests for ProductGrain and identify missing behaviors.
 - Write tests for OrderGrain state transitions and run the relevant test project.
+
+Example prompts to try with DotNetTestReviewerReadOnly.agent:
+
+- Review existing tests for ProductGrain and identify missing behaviors.
