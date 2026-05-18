@@ -75,10 +75,10 @@ Provide performance insights for sql-shoppingapp1-sa1 over the last hour.
 Add a firewall rule to allow my current IP address for sql-shoppingapp1-sa1.
 ```
 
-```
-Generate a Bicep file and deployment script to deploy an Azure App Service container using the mcr.microsoft.com/dotnet/samples:aspnetapp-chiseled image.
+## Step 6
 
-Use Azure CLI commands to deploy the template.
-Use predefined sample names for the resources.
-Follow Azure resource naming best practices.
-```
+Continue with Diagnose_The_Issue_With_ShoppingApp_WebUI exercise.
+
+## Step 7
+
+Continue with Deploy_To_Azure_With_GitHub_Copilot exercise.

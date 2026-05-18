@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/deploy/" />
+  <Folder Name="/src/">
+    <Project Path="src/ShoppingApp.Abstractions/ShoppingApp.Abstractions.csproj" />
+    <Project Path="src/ShoppingApp.Common/ShoppingApp.Common.csproj" />
+    <Project Path="src/ShoppingApp.Grains/ShoppingApp.Grains.csproj" />
+    <Project Path="src/ShoppingApp.WebUI/ShoppingApp.WebUI.csproj" />
+  </Folder>
+  <Folder Name="/test/" />
+  <Folder Name="/workshop/">
+    <File Path="Explore_Practical_Refactoring_With_GitHub_Copilot.md" />
+  </Folder>
+</Solution>

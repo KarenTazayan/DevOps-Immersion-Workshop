@@ -1,0 +1,1 @@
+Diagnose the runtime issue with the Azure Container App `ctap-shoppingapp1-ui-sa1` in the current Azure subscription. Start with Application Insights data first, if telemetry exists, check recent exceptions.
